@@ -1,0 +1,128 @@
+/** Global Style *********************/
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/** Utility classes *****************/
+
+.text-center {text-align: center;}
+.text-bold {font-weight: 900;}
+.text-thin {font-weight: 100;}
+.text-small {font-size: 0.8em;}
+.text-normal {font-size: 1em;}
+.text-lg {font-size: 1.2em;}
+.text-xl {font-size: 1.4em;}
+.text-2xl { font-size: 1.8em;}
+.text-3xl {font-size: 2.2em;}
+.text-4xl {font-size: 2.6em;}
+
+.l-height-small {line-height: 0.8em;}
+.l-height-normal {line-height: 1em;}
+.l-height-lg {line-height: 1.2em;}
+.l-height-xl {line-height: 1.4;}
+.l-height-2xl {line-height: 1.6em;}
+
+.m-0 {margin: 0;}
+.m-4 {margin: 4px;}
+.m-8 {margin: 8px;}
+.m-12 {margin: 12px;}
+
+.ml-0 {margin-left: 0;}
+.ml-4 {margin-left: 4px;}
+.ml-8 {margin-left: 8px;}
+.ml-12 {margin-left: 12px;}
+
+.mr-0 {margin-right: 0;}
+.mr-4 {margin-right: 4px;}
+.mr-8 {margin-right: 8px;}
+.mr-12 {margin-right: 12px;}
+
+.mt-0 {margin-top: 0;}
+.mt-4 {margin-top: 4px;}
+.mt-8 {margin-top: 8px;}
+.mt-12 {margin-top: 12px;}
+
+.mb-0 {margin-bottom: 0;}
+.mb-4 {margin-bottom: 4px;}
+.mb-8 {margin-bottom: 8px;}
+.mb-12 {margin-bottom: 12px;}
+
+.ml-0 {margin-left: 0;}
+.ml-4 {margin-left: 4px;}
+.ml-8 {margin-left: 8px;}
+.ml-12 {margin-left: 12px;}
+
+.link {text-decoration: none;}
+
+.flex {display: flex;}
+
+.space-between {justify-content: space-between;}
+.vertical-center {align-items: center;}
+
+.link, .button {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button {
+  padding: 5px;
+  background-color: #efefef;
+  border-radius: 2px;
+}
+
+.button:hover {
+  background-color: #ccc;
+}
+/** Top Level Component **************/
+.main-wrapper {
+  display: flex;
+  gap: 24px;
+  padding: 26px;
+  height: 100%;
+  width: 100%;
+}
+
+#main-header {
+  width: 240px;
+  height: 100%;
+}
+
+#main-content {
+  width: 540px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 220px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+#main-navigation .link-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#main-navigation .link {
+  padding: 10px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  color: #333;
+  background-color: #ccc;
+}
+
+.project {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
