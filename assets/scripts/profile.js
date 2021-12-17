@@ -1,5 +1,5 @@
 import {Http, Message} from './utilities.js';
-import {createElem, setHTML, setAttribute, appendElement} from './html-helpers.js';
+import {getElements, createElem, setHTML, setAttribute, appendElement} from './html-helpers.js';
 import configuration from './config.js';
 
 /**
@@ -26,10 +26,10 @@ async function getUserFromGitHub() {
  * @param {ConfigurationObject} config
  */
 function setUserInfo(user, config) {
-  const titleElems = document.querySelectorAll(config.placeholders.title);
-  const usernameElems = document.querySelectorAll(config.placeholders.username);
-  const bioElems = document.querySelectorAll(config.placeholders.bio);
-  const profileImageElems = document.querySelectorAll(config.placeholders.profileImage);
+  const titleElems = getElements(config.placeholders.title);
+  const usernameElems = getElements(config.placeholders.username);
+  const bioElems = getElements(config.placeholders.bio);
+  const profileImageElems = getElements(config.placeholders.profileImage);
 
   setHTML(titleElems, user.name);
   setHTML(usernameElems, user.login);
@@ -50,15 +50,12 @@ function setUserInfo(user, config) {
 function setSocialLinks(config) {
   const socialMedia = config.socialLinks ?? {};
   if (!Object.keys(socialMedia).length) return;
-  const socialLinksElem = document.querySelector(config.placeholders.socialLinks);
-  if (!socialLinksElem) return;
-  socialLinksElem.innerHTML = '';
+  const socialLinksElems = getElements(config.placeholders.socialLinks);
+  if (!socialLinksElems) return;
+  setHTML(socialLinksElems, '');
   for (const name in socialMedia) {
-    const linkElem = document.createElement('a');
-    linkElem.target = '_new';
-    linkElem.innerHTML = name;
-    linkElem.href = socialMedia[name];
-    socialLinksElem.appendChild(linkElem);
+    const linkElem = createElem('a', {target: '_new', href: socialMedia[name]}, name);
+    appendElement(socialLinksElems, linkElem)
   }
 }
 
@@ -70,15 +67,12 @@ function setSocialLinks(config) {
 function setGeneralLinks(config) {
   const navLinks = config.navLinks ?? [];
   if (!navLinks.length) { return; }
-  const navLinksElem = document.querySelector(config.placeholders.navLinks);
-  if (!navLinksElem) return;
-  navLinksElem.innerHTML = '';
+  const navLinksElems = getElements(config.placeholders.navLinks);
+  if (!navLinksElems.length) return;
+  setHTML(navLinksElems, '');
   for (let item of navLinks) {
-    const linkElem = document.createElement('a');
-    linkElem.target = '_new';
-    linkElem.innerHTML = item.name;
-    linkElem.href = item.link;
-    navLinksElem.appendChild(linkElem);
+    const linkElem = createElem('a', {target: '_new', href: item.link}, item.name);
+    appendElement(navLinksElems, linkElem);
   }
 }
 

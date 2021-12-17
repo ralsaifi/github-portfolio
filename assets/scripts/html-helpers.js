@@ -1,3 +1,24 @@
+
+/**
+ * Look in the document for the element with the CSS selector (selector). 
+ * return the node element found
+ * @param {string} selector 
+ * @returns Node
+ */
+export function getElement(selector) {
+  return document.querySelector(selector);
+}
+
+/**
+ * Look in the document for the elements with the CSS selector (seletor). 
+ * return NodeList
+ * @param {string} selector 
+ * @returns NodeList
+ */
+export function getElements(selector) {
+  return document.querySelectorAll(selector);
+}
+
 /**
  * assign the html string (htmlString) to the NodeList or node passed (elems)
  * @param {NodeList | Node} elems 
