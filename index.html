@@ -5,20 +5,24 @@
   <title>Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/stylesheets/style.css">
+  <script src="main.js" type="module"></script>
 </head>
 <body>
-  <div class="main-wrapper flex">
-    <header id="main-header">
-      <div class="profile-image">
-  
+  <div class="main-wrapper grid columns-3 full-width full-height">
+    <header class="main-header full-width full-height">
+      <div id="profile-image" class="profile-image full-width">
+        <!-- image element goes here -->
       </div>
-      <h1 class="text-center text-thin text-4xl mt-8 mb-0">Ram Alsaifi</h1>
-      <p class="about l-height-xl">
+      <h1 id="title" class="text-center text-thin text-4xl mt-8 mb-0">Ram Alsaifi</h1>
+      <h2 class="text-center  text-xl font-bold mt-0 mb-0">
+        #(<a href="#" id="username" target="_blank">Ram Alsaifi</a>)
+      </h2>
+      <p id="bio" class="about l-height-xl">
         Hi, welcome to my portfolio. This is made to pull all my public github repositories. 
         It reads the name of the reposities as titles, read the content of the readme file as content, and, 
         link to the them. 
       </p>
-      <nav id="main-navigation">
+      <nav class="main-navigation">
         <div class="link-list text-bold">
           <a href="#" class="link">Link</a>
           <a href="#" class="link">Link</a>
@@ -26,8 +30,8 @@
         </div>
       </nav>
     </header>
-    <main id="main-content">
-      <div class="content-wrapper">
+    <main class="main-content">
+      <div id="project-list" class="content-wrapper">
         <div class="project">
           <header>
             <h2 class="mt-0 text-thin">Project title</h2>
@@ -36,12 +40,16 @@
             <p>Description of the project</p>
           </div>
           <footer class="flex space-between vertical-center">
-            <span class="button">Read Full Content</span>
-            <a href="#" class="link">Visit Repository</a>
+            <span class="button read-more-btn">Read Full Content</span>
+            <a href="#" class="link text-bold">Visit Repository</a>
           </footer>
         </div>
       </div>
     </main>
+    <aside class="main-aside full-width">
+      <h2>Filters</h2>
+      <input type="text" name="" id="filterByName">
+    </aside>
   </div>
 </body>
 </html>
