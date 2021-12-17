@@ -77,20 +77,4 @@ function setGeneralLinks() {
 
 }
 
-/**
- * createLinkForSocialMedia: Create an anchor element and uses the name and value 
- * passed to construct the href attribute. Return the anchor element created
- * @param {string} name 
- * @param {string} value 
- * @returns Node
- */
-function createLinkForSocialMedia(name, value) {
-  const linkElem = document.createElement('a');
-  linkElem.target = '_new';
-  linkElem.innerHTML = name;
-  linkElem.href = value;
-
-  return linkElem;
-}
-
 export default getUserFromGitHub;
