@@ -1,1 +1,3 @@
-import * as profile from './assets/scripts/profile.js';
+import getUserProfile from './assets/scripts/profile.js';
+
+getUserProfile();

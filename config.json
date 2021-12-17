@@ -1,3 +1,15 @@
 {
-  "GitHubUsername": "hello01ram"
+  "GitHubUsername": "hello01ram", 
+  "socialMediaLinks": {
+    "Facebook": "https://facebook.com/#", 
+    "LinkedIn": "https://twitter.com/#", 
+    "Twitter": "https://www.linkedin.com/in/#", 
+    "Tumblr": "https://#.tumblr.com", 
+    "Instagram": "https://www.instagram.com/#"
+  }, 
+  "navLinks": [
+    {"name": "link1", "link": "#", "target": "_new"}, 
+    {"name": "link2", "link": "#"}, 
+    {"name": "link3", "link": "#"}
+  ]
 }

@@ -51,6 +51,7 @@ body {
 .mt-4 {margin-top: 4px;}
 .mt-8 {margin-top: 8px;}
 .mt-12 {margin-top: 12px;}
+.mt-16 {margin-top: 16px;}
 
 .mb-0 {margin-bottom: 0;}
 .mb-4 {margin-bottom: 4px;}
@@ -65,8 +66,11 @@ body {
 .full-width {width: 100%;}
 .full-height {height: 100%;}
 
-.link {text-decoration: none;}
-
+a {color: #134a91; text-decoration: none;}
+a:hover {
+  text-decoration: underline;
+  color: #000;
+}
 .flex {display: flex;}
 .grid {display: grid;}
 .columns-2 {grid-template-columns: auto auto;}
@@ -92,7 +96,7 @@ body {
 }
 /** Top Level Component **************/
 .main-wrapper {
-  grid-template-columns: 250px auto 250px;
+  grid-template-columns: 280px auto 280px;
   gap: 50px;
   padding: 26px;
 }
@@ -103,21 +107,31 @@ body {
 
 .profile-image {
   overflow: hidden;
-  height: 220px;
+  height: 260px;
   background-color: #ccc;
   border-radius: 10px;
+  box-shadow: 0 0 10px #aaa;
 }
 
 .profile-image img {
   width: 100%;
 }
 
-.main-navigation .link-list {
+.main-navigation .nav-links {
   display: flex;
   flex-direction: column;
 }
 
-.main-navigation .link {
+.social-media-links a { 
+  margin: 2px 5px;
+  display: inline-block;
+}
+
+.social-media-links a:before {
+  content: '#';
+}
+
+.main-navigation a {
   padding: 10px;
   margin-bottom: 4px;
   border-radius: 4px;
@@ -125,7 +139,7 @@ body {
   background-color: #eee;
 }
 
-.main-navigation .link:hover {
+.main-navigation a:hover {
   background-color: #ccc;
 }
 
