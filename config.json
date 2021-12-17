@@ -1,6 +1,6 @@
 {
   "GitHubUsername": "hello01ram", 
-  "socialMediaLinks": {
+  "socialLinks": {
     "Facebook": "https://facebook.com/#", 
     "LinkedIn": "https://twitter.com/#", 
     "Twitter": "https://www.linkedin.com/in/#", 
@@ -11,5 +11,14 @@
     {"name": "link1", "link": "#", "target": "_new"}, 
     {"name": "link2", "link": "#"}, 
     {"name": "link3", "link": "#"}
-  ]
+  ], 
+  "placeholders": {
+    "profileImage": ".user-image-placeholder", 
+    "title": ".user-title-placeholder", 
+    "username": ".user-username-placeholder", 
+    "bio": ".user-bio-placeholder", 
+    "navLinks": ".nav-links-placeholder", 
+    "socialLinks": ".social-links-placeholder", 
+    "projectsContainer": ".projects-container-placeholder"
+  }
 }

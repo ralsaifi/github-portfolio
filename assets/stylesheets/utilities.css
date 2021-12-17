@@ -1,18 +1,3 @@
-/** Global Style *********************/
-body {
-  margin: 0;
-  height: 100vh;
-  font-family: Arial, Verdana, sans-serif;
-  color: #333;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-/** Utility classes *****************/
 
 .text-center {text-align: center;}
 .text-bold {font-weight: 900;}
@@ -93,64 +78,4 @@ a:hover {
 
 .button:hover {
   background-color: #ccc;
-}
-/** Top Level Component **************/
-.main-wrapper {
-  grid-template-columns: 280px auto 280px;
-  gap: 50px;
-  padding: 26px;
-}
-
-.main-content {
-  max-width: 100%;
-}
-
-.profile-image {
-  overflow: hidden;
-  height: 260px;
-  background-color: #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #aaa;
-}
-
-.profile-image img {
-  width: 100%;
-}
-
-.main-navigation .nav-links {
-  display: flex;
-  flex-direction: column;
-}
-
-.social-media-links a { 
-  margin: 2px 5px;
-  display: inline-block;
-}
-
-.social-media-links a:before {
-  content: '#';
-}
-
-.main-navigation a {
-  padding: 10px;
-  margin-bottom: 4px;
-  border-radius: 4px;
-  color: #333;
-  background-color: #eee;
-}
-
-.main-navigation a:hover {
-  background-color: #ccc;
-}
-
-.project {
-  width: 100%;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 5px;
-}
-
-.read-more-btn {
-  padding: 5px 10px;
-  border-radius: 50px;
 }
