@@ -6,34 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" type="module"></script>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
+        crossorigin="anonymous"/>
 </head>
-<body class="m-0 h-100-p w-100-p">
+<body class="m-0 h-100-p w-100-p light-bg">
   <div class="main-wrapper grid columns-3 full-width full-height">
-    <header class="main-header full-width full-height">
+    <header class="main-header full-width full-height white-bg round-16 p-20 standard-shadow">
       <div class="user-image-placeholder profile-image full-width">
-        <!-- image element goes here -->
+        <!-- profile image placeholder -->
       </div>
-      <h1 class="user-title-placeholder text-center text-thin text-4xl mt-8 mb-0">Ram Alsaifi</h1>
-      <h2 class="text-center  text-xl font-bold mt-0 mb-0">
-        #(<a href="#" class="user-username-placeholder" target="_blank">Ram Alsaifi</a>)
+      <h1 class="user-title-placeholder text-center text-thin text-4xl mt-8 mb-0">
+        <!-- Title placeholder -->
+      </h1>
+      <h2 class="text-center  text-xl font-bold mt-0">
+        <a href="#" class="user-username-placeholder" target="_blank">
+          <!-- Username placeholder -->
+        </a>
       </h2>
       <p class="user-bio-placeholder l-height-xl mb-0">
-        Hi, welcome to my portfolio. This is made to pull all my public github repositories. 
-        It reads the name of the reposities as titles, read the content of the readme file as content, and, 
-        link to the them. 
+        <!-- Bio placeholder -->
       </p>
+      <div class="user-stats-placeholder mt-12 mb-12 grid gap-4">
+        <!-- stats placeholder -->
+      </div>
       <div class="social-links-placeholder social-links mb-12">
         <!-- social media links placeholder -->
       </div>
       <nav class="main-navigation">
         <div class="nav-links-placeholder nav-links text-bold">
-          <a href="#" class="link">Link</a>
+          <!-- Navigation links placeholder -->
         </div>
       </nav>
     </header>
     <main class="main-content">
       <div class="content-wrapper projects-container-placeholder">
-        <div class="project">
+        <div class="project white-bg round-16 p-16 standard-shadow">
           <header>
             <h2 class="mt-0 text-thin">Project title</h2>
           </header>
@@ -48,8 +56,8 @@
       </div>
     </main>
     <aside class="main-aside full-width">
-      <h2>Filters</h2>
-      <input type="text" name="" id="filterByName">
+      <h2>Search projects</h2>
+      <input type="text" name="" id="filterByName" placeholder="Search project title...">
     </aside>
   </div>
 </body>

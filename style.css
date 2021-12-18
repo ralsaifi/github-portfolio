@@ -1,20 +1,7 @@
 @import url('./assets/stylesheets/utilities.css');
-/** Global Style *********************/
-body {
-  height: 100vh;
-  font-family: Arial, Verdana, sans-serif;
-  color: #333;
-  background-color: #fff;
-  box-sizing: border-box;
-}
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-/** Top Level Component **************/
 .main-wrapper {
-  grid-template-columns: 280px auto 280px;
+  grid-template-columns: 300px auto 300px;
   gap: 50px;
   padding: 26px;
 }
@@ -28,7 +15,6 @@ body {
   height: 260px;
   background-color: #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px #aaa;
 }
 
 .profile-image img {
@@ -61,12 +47,6 @@ body {
   background-color: #ccc;
 }
 
-.project {
-  width: 100%;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 5px;
-}
 
 .read-more-btn {
   padding: 5px 10px;

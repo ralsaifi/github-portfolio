@@ -12,6 +12,11 @@
     {"name": "link2", "link": "#"}, 
     {"name": "link3", "link": "#"}
   ], 
+  "stats": [
+    {"name": "Repositories", "propertyName": "public_repos", "fontawesomeIcon": "fa-list-ul"}, 
+    {"name": "Followers", "propertyName": "followers", "fontawesomeIcon": "fa-eye"}, 
+    {"name": "Location", "propertyName": "location", "fontawesomeIcon": "fa-globe-americas"}    
+  ], 
   "placeholders": {
     "profileImage": ".user-image-placeholder", 
     "title": ".user-title-placeholder", 
@@ -19,6 +24,7 @@
     "bio": ".user-bio-placeholder", 
     "navLinks": ".nav-links-placeholder", 
     "socialLinks": ".social-links-placeholder", 
-    "projectsContainer": ".projects-container-placeholder"
+    "projectsContainer": ".projects-container-placeholder", 
+    "stats": ".user-stats-placeholder"
   }
 }

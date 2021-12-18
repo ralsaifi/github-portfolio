@@ -1,18 +1,18 @@
 import {Http, Message} from './utilities.js';
 import {getElements, createElem, setHTML, setAttribute, appendElement} from './html-helpers.js';
-import configuration from './config.js';
 
 /**
  * Gets the user details from github and call setUserInfo with the github user
+ * @param {ConfigurationObject} config
  */
-async function getUserFromGitHub() {
+async function getUserFromGitHub(config) {
   try {
-    const username = configuration.GitHubUsername;
+    const username = config.GitHubUsername;
     const user = await Http.get(`https://api.github.com/users/${username}`);
     if (!user) return;
-    setUserInfo(user, configuration);
-    setSocialLinks(configuration);
-    setGeneralLinks(configuration);
+    setUserInfo(user, config);
+    setSocialLinks(config);
+    setGeneralLinks(config);
   } catch (err) {
     Message.error('Failed to get user data');
     console.log(err);
@@ -34,11 +34,33 @@ function setUserInfo(user, config) {
   setHTML(titleElems, user.name);
   setHTML(usernameElems, user.login);
   setAttribute(usernameElems, 'href', user.html_url);
-  // setHTML(titleElems, user.name);
   setHTML(bioElems, user.bio);
 
   const imageElem = createElem('img', {src: user.avatar_url});
   appendElement(profileImageElems, imageElem);
+
+  setUserStats(user, config);
+}
+
+/**
+ * Gets the stats from the configuration object, build the html for the them, and append them to the stats placeholder
+ * @param {GitHubUser} user 
+ * @param {ConfigurationObject} config 
+ * @returns 
+ */
+function setUserStats(user, config) {
+  if (!Object.keys(config.stats).length) return;
+  const statsPlaceholderElems = getElements(config.placeholders.stats);
+  let htmlString = '';
+  for (const stat of config.stats) {
+    // stat eg: {"name": "Repositories", "propertyName": "public_repos", "fontawesomeIcon": "fa-list-ul"}
+    htmlString += `<div class="flex space-between">
+      <span><i class="fas ${stat.fontawesomeIcon}"></i> ${stat.name}</span>
+      <span class="repo-count-placeholder">${user[stat.propertyName]}</span>
+    </div>`;
+  }
+
+  setHTML(statsPlaceholderElems, htmlString);
 }
 
 /**
