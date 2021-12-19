@@ -20,6 +20,7 @@ async function getProjectList(config) {
       
   } catch (e) {
     Message.error('Failed to set project list');
+    console.log(e);
   }
 }
 
@@ -44,7 +45,8 @@ function getReposHtml(repoList) {
   if (!repoList.length)
     htmlString += `<h2 class="text-center">No Projects found :(</h2>`;
   else 
-    for (const repo of repoList)
+    for (const repo of repoList) {
+      const updatedAt = new Date(repo.updated_at).toDateString();
       htmlString += `<div class="project white-bg round-16 p-20 standard-shadow mb-16">
         <header>
           <h2 class="mt-0 text-thin">${repo.name}</h2>
@@ -53,26 +55,30 @@ function getReposHtml(repoList) {
           <p>${repo.description ? repo.description : 'no description :('} </p>
         </div>
         <footer class="flex space-between vertical-center">
-          <span class="button round-20">${repo.language}</span>
+          <div>
+            <span class="button round-20">${repo.language}</span>
+            <span class="button round-20">${updatedAt}</span>
+          </div>
           <a href="${repo.html_url}" target="_new" class="link text-bold">Visit Repository</a>
         </footer>
       </div>`;
+    }
   return htmlString;
 }
 
-function setFilters(repoList, config, projectListPlaceholder) {
+function setFilters(repoList, config, projectsPlaceholder) {
   const filtersPlaceholder = getElements(config.placeholders.projectFilters);
-  if (!Object.keys(config.filters).length) return;
+  if (!filtersPlaceholder.length || !Object.keys(config.filters).length) return;
+  addEvent(filtersPlaceholder, 'input', filterProjects.bind(this, repoList, filtersPlaceholder[0], projectsPlaceholder));
   let htmlString = '';
   for (const filter of config.filters) {
-    console.log(filter);
     htmlString += '<div class="mb-8">';
     switch(filter) {
       case 'title':
-        htmlString += '<input type="text" name="title" placeholder="Search project title...">';
+        htmlString += '<input type="text" name="title" class="full-width" placeholder="Search project title...">';
         break;
       case 'description':
-        htmlString += '<input type="text" name="description" placeholder="Search project description...">';
+        htmlString += '<input type="text" name="description" class="full-width" placeholder="Search project description...">';
         break;
       case 'language':
         htmlString += getLanguageFilterHtml(repoList);
@@ -89,10 +95,33 @@ function getLanguageFilterHtml(repoList) {
   repoList.forEach(repo => languageSet.add(repo.language));
   for (const language of languageSet) 
     htmlString += `
-      <input type="checkbox" name="language" id="language-${language}">
+      <input type="checkbox" name="language" id="language-${language}"  value="${language}">
       <label for="language-${language}">${language}</label>`;
   htmlString += '</div>';
   return htmlString;
+}
+
+function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
+  const values = new FormData(filtersPlaceholder);
+  let filteredList = repoList;
+  for (const [key, value] of values) {
+    if (!value.trim()) continue;
+    switch(key) {
+      case 'title':
+        filteredList = filteredList.filter(repo => repo.name
+          ?.toLowerCase().includes(value.toLowerCase()));
+        break;
+      case 'description':
+        filteredList = filteredList.filter(repo => repo.description
+          ?.toLowerCase().includes(value.toLowerCase()));
+        break;
+      case 'language':
+        filteredList = filteredList.filter(repo => repo.language
+          ?.toLowerCase().includes(value.toLowerCase()));
+        break;
+    }
+  }
+  setProjectList(filteredList, projectsPlaceholder);
 }
 
 function filterProjectsByTitle(repoList, projectListPlaceholder, {target}) {

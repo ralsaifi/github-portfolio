@@ -91,7 +91,7 @@ export function appendElement(parentElems, childElem) {
  */
 export function addEvent(elems, eventName, func) {
   if (elems && !elems.length && elems.ELEMENT_NODE) 
-    elem.addEventListener(eventName, func);
+    elems.addEventListener(eventName, func);
   else if (elems && elems.length) 
     for (const elem of elems)
       elem.addEventListener(eventName, func);
