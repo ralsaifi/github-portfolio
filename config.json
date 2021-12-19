@@ -2,11 +2,11 @@
   "GitHubUsername": "hello01ram", 
   "GitHubApiUrl": "https://api.github.com", 
   "socialLinks": {
-    "Facebook": "https://facebook.com/#", 
-    "LinkedIn": "https://twitter.com/#", 
-    "Twitter": "https://www.linkedin.com/in/#", 
-    "Tumblr": "https://#.tumblr.com", 
-    "Instagram": "https://www.instagram.com/#"
+    "Facebook": "https://facebook.com/", 
+    "LinkedIn": "https://twitter.com/", 
+    "Twitter": "https://www.linkedin.com/in/", 
+    "Tumblr": "https://tumblr.com", 
+    "Instagram": "https://www.instagram.com/"
   }, 
   "navLinks": [
     {"name": "link1", "link": "#", "target": "_new"}, 
@@ -21,7 +21,8 @@
   "filters": [
     "title", 
     "description", 
-    "language"
+    "language", 
+    "updatedOn"
   ], 
   "placeholders": {
     "socialLinks": ".social-links-placeholder", 

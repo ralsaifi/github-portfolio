@@ -71,22 +71,29 @@ function setFilters(repoList, config, projectsPlaceholder) {
   if (!filtersPlaceholder.length || !Object.keys(config.filters).length) return;
   addEvent(filtersPlaceholder, 'input', filterProjects.bind(this, repoList, filtersPlaceholder[0], projectsPlaceholder));
   let htmlString = '';
-  for (const filter of config.filters) {
-    htmlString += '<div class="mb-8">';
-    switch(filter) {
-      case 'title':
-        htmlString += '<input type="text" name="title" class="full-width" placeholder="Search project title...">';
-        break;
-      case 'description':
-        htmlString += '<input type="text" name="description" class="full-width" placeholder="Search project description...">';
-        break;
-      case 'language':
-        htmlString += getLanguageFilterHtml(repoList);
-        break;
-    }
-    htmlString += '</div>';
-  }
+  for (const filter of config.filters)
+    htmlString += setFilterHtml(filter, repoList);
   setHTML(filtersPlaceholder, htmlString);
+}
+
+function setFilterHtml(filter, repoList) {
+  let htmlString = '<div class="mb-8">';
+  switch(filter) {
+    case 'title':
+      htmlString += '<input type="text" name="title" class="full-width" placeholder="Search project title...">';
+      break;
+    case 'description':
+      htmlString += '<input type="text" name="description" class="full-width" placeholder="Search project description...">';
+      break;
+    case 'language':
+      htmlString += getLanguageFilterHtml(repoList);
+      break;
+    case 'updatedOn':
+      htmlString += getDateFilterHtml('updatedOn');
+      break;
+  }
+  htmlString += '</div>';
+  return htmlString;
 }
 
 function getLanguageFilterHtml(repoList) {
@@ -99,6 +106,22 @@ function getLanguageFilterHtml(repoList) {
       <label for="language-${language}">${language}</label>`;
   htmlString += '</div>';
   return htmlString;
+}
+
+function getDateFilterHtml(name) {
+  return `<div>
+    <div class="mb-8">
+      <input type="date" name="${name}" class="full-width">
+    </div>
+    <div>
+      <input type="radio" id="update-on-option" name="updatedDate" value="on">
+      <label for="update-on-option">On</label>
+      <input type="radio" id="update-before-option" name="updatedDate" value="before">
+      <label for="update-before-option">Before</label>
+      <input type="radio" id="update-after-option" name="updatedDate" value="after">
+      <label for="update-after-option">After</label>
+    </div>
+  </div>`;
 }
 
 function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
@@ -122,11 +145,6 @@ function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
     }
   }
   setProjectList(filteredList, projectsPlaceholder);
-}
-
-function filterProjectsByTitle(repoList, projectListPlaceholder, {target}) {
-  const filteredList = repoList.filter(repo => repo.name.includes(target.value));
-  setProjectList(filteredList, projectListPlaceholder);
 }
 
 export default getProjectList;

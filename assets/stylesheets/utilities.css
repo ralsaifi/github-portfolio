@@ -134,6 +134,7 @@ a:hover {
 }
 
 input[type="text"], 
+input[type="date"], 
 input[type="number"], 
 textarea {
   padding: 10px;
