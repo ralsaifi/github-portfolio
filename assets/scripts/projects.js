@@ -1,5 +1,5 @@
 import { Http, Message } from './utilities.js';
-import { getElements, setHTML, addEvent } from './html-helpers.js';
+import { getElement, getElements, setHTML, addEvent } from './html-helpers.js';
 
 /**
  * Gets the list of public repositories from github and call 
@@ -20,7 +20,6 @@ async function getProjectList(config) {
       
   } catch (e) {
     Message.error('Failed to set project list');
-    console.log(e);
   }
 }
 
@@ -86,39 +85,38 @@ function setFilterHtml(filter, repoList) {
       htmlString += '<input type="text" name="description" class="full-width" placeholder="Search project description...">';
       break;
     case 'language':
-      htmlString += getLanguageFilterHtml(repoList);
+      const languageSet = new Set();
+      repoList.forEach(repo => languageSet.add(repo.language));
+      htmlString += getLanguageFilterHtml(languageSet);
       break;
     case 'updatedOn':
-      htmlString += getDateFilterHtml('updatedOn');
+      htmlString += getDateFilterHtml();
       break;
   }
   htmlString += '</div>';
   return htmlString;
 }
 
-function getLanguageFilterHtml(repoList) {
-  const languageSet = new Set();
-  let htmlString = '<div>';
-  repoList.forEach(repo => languageSet.add(repo.language));
+function getLanguageFilterHtml(languageSet) {
+  let htmlString = '';
   for (const language of languageSet) 
     htmlString += `
       <input type="checkbox" name="language" id="language-${language}"  value="${language}">
       <label for="language-${language}">${language}</label>`;
-  htmlString += '</div>';
   return htmlString;
 }
 
-function getDateFilterHtml(name) {
+function getDateFilterHtml() {
   return `<div>
     <div class="mb-8">
-      <input type="date" name="${name}" class="full-width">
+      <input type="date" name="updatedOn" class="full-width">
     </div>
     <div>
-      <input type="radio" id="update-on-option" name="updatedDate" value="on">
+      <input type="radio" id="update-on-option" name="updatedPeriod" value="on" checked>
       <label for="update-on-option">On</label>
-      <input type="radio" id="update-before-option" name="updatedDate" value="before">
+      <input type="radio" id="update-before-option" name="updatedPeriod" value="before">
       <label for="update-before-option">Before</label>
-      <input type="radio" id="update-after-option" name="updatedDate" value="after">
+      <input type="radio" id="update-after-option" name="updatedPeriod" value="after">
       <label for="update-after-option">After</label>
     </div>
   </div>`;
@@ -127,6 +125,7 @@ function getDateFilterHtml(name) {
 function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
   const values = new FormData(filtersPlaceholder);
   let filteredList = repoList;
+  let filterDateValue;
   for (const [key, value] of values) {
     if (!value.trim()) continue;
     switch(key) {
@@ -142,9 +141,28 @@ function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
         filteredList = filteredList.filter(repo => repo.language
           ?.toLowerCase().includes(value.toLowerCase()));
         break;
+      case 'updatedOn':
+        const periodElements = getElement('[name="updatedPeriod"]:checked').value ?? 'on';
+        filterDateValue = new Date(value);
+        filteredList = filterProjectsByDate(filteredList, filterDateValue, periodElements);
+        break;
     }
   }
   setProjectList(filteredList, projectsPlaceholder);
+}
+
+function filterProjectsByDate(repoList, filterDate, datePeriod) {
+  console.log(filterDate, datePeriod);
+  const filteredList = repoList.filter(repo => {
+    const updatedOn = new Date(repo.updated_at);
+    if (datePeriod === 'before') 
+      return updatedOn < filterDate;
+    else if (datePeriod === 'after')
+      return updatedOn > filterDate;
+    else 
+      return updatedOn.toDateString() === filterDate.toDateString();
+  });
+  return filteredList;
 }
 
 export default getProjectList;
