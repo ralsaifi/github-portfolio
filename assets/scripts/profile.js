@@ -7,15 +7,16 @@ import {getElements, createElem, setHTML, setAttribute, appendElement} from './h
  */
 async function getUserFromGitHub(config) {
   try {
-    const username = config.GitHubUsername;
-    const user = await Http.get(`https://api.github.com/users/${username}`);
-    if (!user) return;
+    const user = await Http.get(`${config.GitHubApiUrl}/users/${config.GitHubUsername}`);
+    if (!user) {
+      Message.error('Failed to set user data: No user data found');
+      return;
+    };
     setUserInfo(user, config);
     setSocialLinks(config);
     setGeneralLinks(config);
   } catch (err) {
-    Message.error('Failed to get user data');
-    console.log(err);
+    Message.error('Failed to set user data');
   }
 }
 
