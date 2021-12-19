@@ -127,7 +127,6 @@ a:hover {
 .button {
   padding: 5px;
   background-color: #efefef;
-  border-radius: 2px;
 }
 
 .button:hover {

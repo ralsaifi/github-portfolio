@@ -15,9 +15,9 @@ async function getProjectList(config) {
       return;
     }
     const projectListPlaceholder = getElements(config.placeholders.projectsContainer);
-    const filterByTitlePlaceholder = getElements(config.placeholders.filterByTitle);
-    setProjectList(repoList, projectListPlaceholder);
-    setFilters(repoList, projectListPlaceholder, filterByTitlePlaceholder);
+    if (projectListPlaceholder) setProjectList(repoList, projectListPlaceholder);
+    if (projectListPlaceholder) setFilters(repoList, config, projectListPlaceholder);
+      
   } catch (e) {
     Message.error('Failed to set project list');
   }
@@ -53,15 +53,46 @@ function getReposHtml(repoList) {
           <p>${repo.description ? repo.description : 'no description :('} </p>
         </div>
         <footer class="flex space-between vertical-center">
-          <span class="button read-more-btn">Read Full Content</span>
+          <span class="button round-20">${repo.language}</span>
           <a href="${repo.html_url}" target="_new" class="link text-bold">Visit Repository</a>
         </footer>
       </div>`;
   return htmlString;
 }
 
-function setFilters(repoList, projectListPlaceholder, filterByTitlePlaceholder) {
-  addEvent(filterByTitlePlaceholder, 'keyup', filterProjectsByTitle.bind(this, repoList, projectListPlaceholder))
+function setFilters(repoList, config, projectListPlaceholder) {
+  const filtersPlaceholder = getElements(config.placeholders.projectFilters);
+  if (!Object.keys(config.filters).length) return;
+  let htmlString = '';
+  for (const filter of config.filters) {
+    console.log(filter);
+    htmlString += '<div class="mb-8">';
+    switch(filter) {
+      case 'title':
+        htmlString += '<input type="text" name="title" placeholder="Search project title...">';
+        break;
+      case 'description':
+        htmlString += '<input type="text" name="description" placeholder="Search project description...">';
+        break;
+      case 'language':
+        htmlString += getLanguageFilterHtml(repoList);
+        break;
+    }
+    htmlString += '</div>';
+  }
+  setHTML(filtersPlaceholder, htmlString);
+}
+
+function getLanguageFilterHtml(repoList) {
+  const languageSet = new Set();
+  let htmlString = '<div>';
+  repoList.forEach(repo => languageSet.add(repo.language));
+  for (const language of languageSet) 
+    htmlString += `
+      <input type="checkbox" name="language" id="language-${language}">
+      <label for="language-${language}">${language}</label>`;
+  htmlString += '</div>';
+  return htmlString;
 }
 
 function filterProjectsByTitle(repoList, projectListPlaceholder, {target}) {

@@ -2,7 +2,7 @@
 
 .main-wrapper {
   grid-template-columns: 300px auto 300px;
-  gap: 50px;
+  gap: 40px;
   padding: 26px;
 }
 
@@ -45,10 +45,4 @@
 
 .main-navigation a:hover {
   background-color: #ccc;
-}
-
-
-.read-more-btn {
-  padding: 5px 10px;
-  border-radius: 50px;
 }

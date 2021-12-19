@@ -18,6 +18,11 @@
     {"name": "Followers", "propertyName": "followers", "fontawesomeIcon": "fa-eye"}, 
     {"name": "Location", "propertyName": "location", "fontawesomeIcon": "fa-globe-americas"}    
   ], 
+  "filters": [
+    "title", 
+    "description", 
+    "language"
+  ], 
   "placeholders": {
     "socialLinks": ".social-links-placeholder", 
     "navLinks": ".nav-links-placeholder", 
@@ -27,6 +32,7 @@
     "username": ".user-username-placeholder", 
     "bio": ".user-bio-placeholder", 
     "projectsContainer": ".projects-container-placeholder", 
+    "projectFilters": ".project-filters-placeholder", 
     "filterByTitle": ".filter-by-title-placeholder"
   }
 }
