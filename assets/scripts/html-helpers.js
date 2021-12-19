@@ -26,13 +26,11 @@ export function getElements(selector) {
  * @returns 
  */
  export function setHTML(elems, htmlString) {
-  if (elems && !elems.length && elems.ELEMENT_NODE) {
+  if (elems && !elems.length && elems.ELEMENT_NODE)
     elems.innerHTML = htmlString;
-  } else if (elems && elems.length) {
-    for (const elem of elems) {
+  else if (elems && elems.length)
+    for (const elem of elems) 
       elem.innerHTML = htmlString;
-    }
-  }  
 }
 
 /**
@@ -43,13 +41,11 @@ export function getElements(selector) {
  * @param {string} value 
  */
 export function setAttribute(elems, attrName, value) {
-  if (elems && !elems.length && elems.ELEMENT_NODE) {
+  if (elems && !elems.length && elems.ELEMENT_NODE) 
     elems.setAttribute(attrName, value);
-  } else if (elems && elems.length) {
-    for (const elem of elems) {
+  else if (elems && elems.length)
+    for (const elem of elems) 
       elem.setAttribute(attrName, value);
-    }
-  }  
 }
 
 /**
@@ -79,10 +75,24 @@ export function appendElement(parentElems, childElem) {
   if (parentElems && !parentElems.length && parentElems.ELEMENT_NODE) {
     const clonedChild = childElem.cloneNode(true);
     parentElems.appendChild(clonedChild);
-  } else if (parentElems && parentElems.length) {
+  } else if (parentElems && parentElems.length)
     for (const parentElem of parentElems) {
       const clonedChild = childElem.cloneNode(true);
       parentElem.appendChild(clonedChild);
     }
-  }  
+}
+
+/**
+ * Attach the event listener (eventName) to the element (elems) and call function (func) 
+ * when the event fires
+ * @param {NodeList | Node} elems 
+ * @param {string} eventName 
+ * @param {Function} func
+ */
+export function addEvent(elems, eventName, func) {
+  if (elems && !elems.length && elems.ELEMENT_NODE) 
+    elem.addEventListener(eventName, func);
+  else if (elems && elems.length) 
+    for (const elem of elems)
+      elem.addEventListener(eventName, func);
 }
