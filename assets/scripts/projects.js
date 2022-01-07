@@ -78,11 +78,8 @@ function setFilters(repoList, config, projectsPlaceholder) {
 function setFilterHtml(filter, repoList) {
   let htmlString = '<div class="mb-8">';
   switch(filter) {
-    case 'title':
-      htmlString += '<input type="text" name="title" class="full-width" placeholder="Search project title...">';
-      break;
-    case 'description':
-      htmlString += '<input type="text" name="description" class="full-width" placeholder="Search project description...">';
+    case 'query':
+      htmlString += '<input type="text" name="query" class="full-width" placeholder="Search project...">';
       break;
     case 'language':
       const languageSet = new Set();
@@ -129,12 +126,10 @@ function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
   for (const [key, value] of values) {
     if (!value.trim()) continue;
     switch(key) {
-      case 'title':
+      case 'query':
         filteredList = filteredList.filter(repo => repo.name
-          ?.toLowerCase().includes(value.toLowerCase()));
-        break;
-      case 'description':
-        filteredList = filteredList.filter(repo => repo.description
+          ?.toLowerCase().includes(value.toLowerCase()) || 
+        repo.description
           ?.toLowerCase().includes(value.toLowerCase()));
         break;
       case 'language':

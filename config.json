@@ -19,8 +19,7 @@
     {"name": "Location", "propertyName": "location", "fontawesomeIcon": "fa-globe-americas"}    
   ], 
   "filters": [
-    "title", 
-    "description", 
+    "query", 
     "language", 
     "updatedOn"
   ], 

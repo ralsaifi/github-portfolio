@@ -46,3 +46,29 @@
 .main-navigation a:hover {
   background-color: #ccc;
 }
+
+/** Breakpoints ******************/
+@media (max-width: 1499px) {
+  .main-wrapper { gap: 10px;}
+}
+
+@media (max-width: 1299px) {
+  .main-wrapper {
+    grid-template-columns: 300px auto;
+    grid-template-rows: auto 1fr;
+    padding-right: 0;
+  }
+
+  .main-header {
+    grid-row: 1/-1;
+  }
+
+  .main-aside {
+    grid-row: 1/1;
+    padding: 0 16px;
+  }
+
+  .main-aside h2 {
+    display: none;
+  }
+}

@@ -91,6 +91,16 @@ body {
 .round-16 {border-radius: 16px;}
 .round-20 {border-radius: 20px;}
 
+.gap-0 {gap: 0;}
+.gap-4px {gap: 4px;}
+.gap-8px {gap: 8px;}
+.gap-12px {gap: 12px;}
+.gap-20px {gap: 20px;}
+.gap-28px {gap: 28px;}
+.gap-32px {gap: 32px;}
+.gap-40px {gap: 40px;}
+
+
 .full-width {width: 100%;}
 .full-height {height: 100%;}
 
