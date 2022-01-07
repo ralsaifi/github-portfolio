@@ -72,3 +72,47 @@
     display: none;
   }
 }
+
+@media (max-width: 999px) {
+  .main-wrapper {
+    grid-template-columns: 270px auto;
+    padding: 0;
+  }
+
+  .main-header {
+    border-radius: 0;
+  }
+
+  .main-aside {
+    padding-top: 10px;
+  }
+
+  .profile-image {
+    height: 225px;
+  }
+}
+
+@media (max-width: 799px) {
+  .main-wrapper {
+    grid-template-columns: auto 1fr;
+  }
+
+  .main-header {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .main-content {
+    grid-column: 1/-1;
+  }
+
+  .hidden-mobile-header > *:not(.profile-image) {
+    display: none;
+  }
+  
+  .hidden-mobile-header .profile-image {
+    width: 110px;
+    height: 90px;
+  }
+}
