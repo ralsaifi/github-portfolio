@@ -1,26 +1,20 @@
-import { Http, Message } from './utilities.js';
+import { Message } from './utilities.js';
 import { getElement, setHTML, addEvent } from './html-helpers.js';
 
 /**
- * Gets the list of public repositories from github and call 
- * setProject list to render the list to UI
+ * Renders the list of repos as project using the approperiate functions
+ * @param {GitHubRepository[]} repoList 
  * @param {ConfigurationObject} config 
  * @returns 
  */
-async function getProjectList(config) {
+function setProjectList(repoList, config) {
   try {
-    const repoList = await Http.get(`${config.GitHubApiUrl}/users/${config.GitHubUsername}/repos?type=owner`);
-    if (!repoList) {
-      Message.error('Failed to set project list: No projects found');
-      return;
-    }
     const projectListPlaceholder = getElement('.projects-container-placeholder');
-    if (projectListPlaceholder) setProjectList(repoList, projectListPlaceholder);
-    if (projectListPlaceholder) setFilters(repoList, config, projectListPlaceholder);
-      
+    if (!projectListPlaceholder) { return; }
+    renderProjectList(repoList, projectListPlaceholder);
+    setFilters(repoList, config, projectListPlaceholder);
   } catch (e) {
     Message.error('Failed to set project list');
-    console.log('Error: ', e);
   }
 }
 
@@ -29,7 +23,7 @@ async function getProjectList(config) {
  * @param {GitHubRepository[]} repoList 
  * @param {Node} projectListPlaceholder 
  */
-function setProjectList(repoList, projectListPlaceholder) {
+function renderProjectList(repoList, projectListPlaceholder) {
   if (!projectListPlaceholder) return;
   const htmlString = getReposHtml(repoList);
   setHTML(projectListPlaceholder, htmlString);
@@ -103,7 +97,7 @@ function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
         break;
     }
   }
-  setProjectList(filteredList, projectsPlaceholder);
+  renderProjectList(filteredList, projectsPlaceholder);
 }
 
 function filterProjectsByDate(repoList, filterDate, datePeriod) {
@@ -153,4 +147,4 @@ function setDateFilterHTML() {
   </div>`;
 }
 
-export default getProjectList;
+export default setProjectList;

@@ -1,23 +1,18 @@
-import {Http, Message} from './utilities.js';
+import {Message} from './utilities.js';
 import {getElement, createElem, setHTML, setAttribute, appendElement} from './html-helpers.js';
 
 /**
- * Gets the user details from github and call setUserInfo with the github user
+ * set user profile using user info and config
+ * @param {GitHubUser} user
  * @param {ConfigurationObject} config
  */
-async function getUserFromGitHub(config) {
+function setUserProfile(user, config) {
   try {
-    const user = await Http.get(`${config.GitHubApiUrl}/users/${config.GitHubUsername}`);
-    if (!user) {
-      Message.error('Failed to set user data: No user data found');
-      return;
-    };
     setUserInfo(user, config);
     setSocialLinks(config);
     setGeneralLinks(config);
   } catch (err) {
     Message.error('Failed to set user data');
-    console.log(err)
   }
 }
 
@@ -101,4 +96,4 @@ function setGeneralLinks(config) {
 }
 
 
-export default getUserFromGitHub;
+export default setUserProfile;
