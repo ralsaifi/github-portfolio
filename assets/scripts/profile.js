@@ -1,5 +1,5 @@
 import {Http, Message} from './utilities.js';
-import {getElements, createElem, setHTML, setAttribute, appendElement} from './html-helpers.js';
+import {getElement, createElem, setHTML, setAttribute, appendElement} from './html-helpers.js';
 
 /**
  * Gets the user details from github and call setUserInfo with the github user
@@ -17,6 +17,7 @@ async function getUserFromGitHub(config) {
     setGeneralLinks(config);
   } catch (err) {
     Message.error('Failed to set user data');
+    console.log(err)
   }
 }
 
@@ -27,18 +28,18 @@ async function getUserFromGitHub(config) {
  * @param {ConfigurationObject} config
  */
 function setUserInfo(user, config) {
-  const titleElems = getElements(config.placeholders.title);
-  const usernameElems = getElements(config.placeholders.username);
-  const bioElems = getElements(config.placeholders.bio);
-  const profileImageElems = getElements(config.placeholders.profileImage);
+  const titleElem = getElement('.user-title-placeholder');
+  const usernameElem = getElement('.user-username-placeholder');
+  const bioElem = getElement('.user-bio-placeholder');
+  const profileImageElem = getElement('.user-image-placeholder');
 
-  setHTML(titleElems, user.name);
-  setHTML(usernameElems, user.login);
-  setAttribute(usernameElems, 'href', user.html_url);
-  setHTML(bioElems, user.bio);
+  setHTML(titleElem, user.name);
+  setHTML(usernameElem, user.login);
+  setAttribute(usernameElem, 'href', user.html_url);
+  setHTML(bioElem, user.bio);
 
   const imageElem = createElem('img', {src: user.avatar_url});
-  appendElement(profileImageElems, imageElem);
+  appendElement(profileImageElem, imageElem);
 
   setUserStats(user, config);
 }
@@ -51,7 +52,7 @@ function setUserInfo(user, config) {
  */
 function setUserStats(user, config) {
   if (!Object.keys(config.stats).length) return;
-  const statsPlaceholderElems = getElements(config.placeholders.stats);
+  const statsPlaceholderElem = getElement('.user-stats-placeholder');
   let htmlString = '';
   for (const stat of config.stats) {
     // stat eg: {"name": "Repositories", "propertyName": "public_repos", "fontawesomeIcon": "fa-list-ul"}
@@ -61,7 +62,7 @@ function setUserStats(user, config) {
     </div>`;
   }
 
-  setHTML(statsPlaceholderElems, htmlString);
+  setHTML(statsPlaceholderElem, htmlString);
 }
 
 /**
@@ -73,12 +74,12 @@ function setUserStats(user, config) {
 function setSocialLinks(config) {
   const socialMedia = config.socialLinks ?? {};
   if (!Object.keys(socialMedia).length) return;
-  const socialLinksElems = getElements(config.placeholders.socialLinks);
-  if (!socialLinksElems) return;
-  setHTML(socialLinksElems, '');
+  const socialLinksElem = getElement('.social-links-placeholder');
+  if (!socialLinksElem) return;
+  setHTML(socialLinksElem, '');
   for (const name in socialMedia) {
     const linkElem = createElem('a', {target: '_new', href: socialMedia[name]}, name);
-    appendElement(socialLinksElems, linkElem)
+    appendElement(socialLinksElem, linkElem)
   }
 }
 
@@ -90,12 +91,12 @@ function setSocialLinks(config) {
 function setGeneralLinks(config) {
   const navLinks = config.navLinks ?? [];
   if (!navLinks.length) { return; }
-  const navLinksElems = getElements(config.placeholders.navLinks);
-  if (!navLinksElems.length) return;
-  setHTML(navLinksElems, '');
+  const navLinksElem = getElement('.nav-links-placeholder');
+  if (!navLinksElem) return;
+  setHTML(navLinksElem, '');
   for (let item of navLinks) {
     const linkElem = createElem('a', {target: '_new', href: item.link}, item.name);
-    appendElement(navLinksElems, linkElem);
+    appendElement(navLinksElem, linkElem);
   }
 }
 

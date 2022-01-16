@@ -14,7 +14,7 @@ async function getProjectList(config) {
       Message.error('Failed to set project list: No projects found');
       return;
     }
-    const projectListPlaceholder = getElements(config.placeholders.projectsContainer);
+    const projectListPlaceholder = getElement('.projects-container-placeholder');
     if (projectListPlaceholder) setProjectList(repoList, projectListPlaceholder);
     if (projectListPlaceholder) setFilters(repoList, config, projectListPlaceholder);
       
@@ -66,8 +66,8 @@ function getReposHtml(repoList) {
 }
 
 function setFilters(repoList, config, projectsPlaceholder) {
-  const filtersPlaceholder = getElements(config.placeholders.projectFilters);
-  if (!filtersPlaceholder.length || !Object.keys(config.filters).length) return;
+  const filtersPlaceholder = getElement('.project-filters-placeholder');
+  if (!filtersPlaceholder || !Object.keys(config.filters).length) return;
   addEvent(filtersPlaceholder, 'input', filterProjects.bind(this, repoList, filtersPlaceholder[0], projectsPlaceholder));
   let htmlString = '';
   for (const filter of config.filters)
