@@ -47,6 +47,10 @@
   background-color: #ccc;
 }
 
+.project footer {
+  font-size: 0.8em;
+}
+
 /** Breakpoints ******************/
 @media (max-width: 1499px) {
   .main-wrapper { gap: 10px;}
@@ -94,25 +98,43 @@
 
 @media (max-width: 799px) {
   .main-wrapper {
-    grid-template-columns: auto 1fr;
+    padding: 10px;
+    grid-template-columns: 150px auto;
+    gap: 0;
   }
 
-  .main-header {
-    border-radius: 15px;
-    padding: 10px;
-    margin: 10px;
+  .mobile-header {
+    grid-row: 1/2;
+    padding: 0;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    background: none;
+    box-shadow: none;
+  }
+
+  .mobile-header .profile-image {
+    height: 140px;
+  }
+
+  .profile-mobile-info {
+    display: none;
+  }
+
+  .main-aside {
+    padding: 0;
   }
 
   .main-content {
     grid-column: 1/-1;
+    padding: 0;
   }
 
-  .hidden-mobile-header > *:not(.profile-image) {
-    display: none;
+  .filter-by-date-placeholder div {
+    margin-bottom: 2px;
   }
-  
-  .hidden-mobile-header .profile-image {
-    width: 110px;
-    height: 90px;
+
+  input[type="text"], 
+  input[type="date"] {
+    padding: 6px;
   }
 }

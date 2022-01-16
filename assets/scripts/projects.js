@@ -115,9 +115,7 @@ function filterProjectsByDate(repoList, filterDate, datePeriod) {
 }
 
 function setQueryFilterHTML() {
-  return `<div class="mb-8">
-    <input type="text" name="query" class="full-width" placeholder="Search project...">
-  </div>`;
+  return `<input type="text" name="query" class="full-width" placeholder="Search project...">`;
 }
 
 function setLanguageFilterHTML(repoList) {
@@ -132,8 +130,7 @@ function setLanguageFilterHTML(repoList) {
 }
 
 function setDateFilterHTML() {
-  return `<div>
-    <div class="mb-8">
+  return `<div class="mb-8">
       <input type="date" name="updatedOn" class="full-width">
     </div>
     <div>
@@ -143,8 +140,7 @@ function setDateFilterHTML() {
       <label for="update-before-option">Before</label>
       <input type="radio" id="update-after-option" name="updatedPeriod" value="after">
       <label for="update-after-option">After</label>
-    </div>
-  </div>`;
+    </div>`;
 }
 
 export default setProjectList;
