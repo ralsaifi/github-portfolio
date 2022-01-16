@@ -17,10 +17,5 @@
     {"name": "Repositories", "propertyName": "public_repos", "fontawesomeIcon": "fa-list-ul"}, 
     {"name": "Followers", "propertyName": "followers", "fontawesomeIcon": "fa-eye"}, 
     {"name": "Location", "propertyName": "location", "fontawesomeIcon": "fa-globe-americas"}    
-  ], 
-  "filters": [
-    "query", 
-    "language", 
-    "updatedOn"
   ]
 }

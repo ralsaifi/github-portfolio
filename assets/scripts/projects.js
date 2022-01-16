@@ -1,5 +1,5 @@
 import { Http, Message } from './utilities.js';
-import { getElement, getElements, setHTML, addEvent } from './html-helpers.js';
+import { getElement, setHTML, addEvent } from './html-helpers.js';
 
 /**
  * Gets the list of public repositories from github and call 
@@ -20,6 +20,7 @@ async function getProjectList(config) {
       
   } catch (e) {
     Message.error('Failed to set project list');
+    console.log('Error: ', e);
   }
 }
 
@@ -66,57 +67,16 @@ function getReposHtml(repoList) {
 }
 
 function setFilters(repoList, config, projectsPlaceholder) {
-  const filtersPlaceholder = getElement('.project-filters-placeholder');
-  if (!filtersPlaceholder || !Object.keys(config.filters).length) return;
-  addEvent(filtersPlaceholder, 'input', filterProjects.bind(this, repoList, filtersPlaceholder[0], projectsPlaceholder));
-  let htmlString = '';
-  for (const filter of config.filters)
-    htmlString += setFilterHtml(filter, repoList);
-  setHTML(filtersPlaceholder, htmlString);
-}
+  const filterForm = getElement('.project-filters-placeholder');
+  if (!filterForm) return;
+  addEvent(filterForm, 'input', filterProjects.bind(this, repoList, filterForm, projectsPlaceholder));
+  const queryFilterPlaceholder = getElement('.filter-by-title-placeholder');
+  const languageFilterPlaceholder = getElement('.filter-by-language-placeholder');
+  const dateFilterPlaceholder = getElement('.filter-by-date-placeholder');
 
-function setFilterHtml(filter, repoList) {
-  let htmlString = '<div class="mb-8">';
-  switch(filter) {
-    case 'query':
-      htmlString += '<input type="text" name="query" class="full-width" placeholder="Search project...">';
-      break;
-    case 'language':
-      const languageSet = new Set();
-      repoList.forEach(repo => languageSet.add(repo.language));
-      htmlString += getLanguageFilterHtml(languageSet);
-      break;
-    case 'updatedOn':
-      htmlString += getDateFilterHtml();
-      break;
-  }
-  htmlString += '</div>';
-  return htmlString;
-}
-
-function getLanguageFilterHtml(languageSet) {
-  let htmlString = '';
-  for (const language of languageSet) 
-    htmlString += `
-      <input type="checkbox" name="language" id="language-${language}"  value="${language}">
-      <label for="language-${language}">${language}</label>`;
-  return htmlString;
-}
-
-function getDateFilterHtml() {
-  return `<div>
-    <div class="mb-8">
-      <input type="date" name="updatedOn" class="full-width">
-    </div>
-    <div>
-      <input type="radio" id="update-on-option" name="updatedPeriod" value="on" checked>
-      <label for="update-on-option">On</label>
-      <input type="radio" id="update-before-option" name="updatedPeriod" value="before">
-      <label for="update-before-option">Before</label>
-      <input type="radio" id="update-after-option" name="updatedPeriod" value="after">
-      <label for="update-after-option">After</label>
-    </div>
-  </div>`;
+  queryFilterPlaceholder.innerHTML = setQueryFilterHTML();
+  languageFilterPlaceholder.innerHTML = setLanguageFilterHTML(repoList);
+  dateFilterPlaceholder.innerHTML = setDateFilterHTML();
 }
 
 function filterProjects(repoList, filtersPlaceholder, projectsPlaceholder) {
@@ -158,6 +118,39 @@ function filterProjectsByDate(repoList, filterDate, datePeriod) {
       return updatedOn.toDateString() === filterDate.toDateString();
   });
   return filteredList;
+}
+
+function setQueryFilterHTML() {
+  return `<div class="mb-8">
+    <input type="text" name="query" class="full-width" placeholder="Search project...">
+  </div>`;
+}
+
+function setLanguageFilterHTML(repoList) {
+  const languageSet = new Set();
+  repoList.forEach(repo => languageSet.add(repo.language));
+  let htmlString = '';
+  for (const language of languageSet) 
+    htmlString += `
+      <input type="checkbox" name="language" id="language-${language}"  value="${language}">
+      <label for="language-${language}">${language}</label>`;
+  return htmlString;
+}
+
+function setDateFilterHTML() {
+  return `<div>
+    <div class="mb-8">
+      <input type="date" name="updatedOn" class="full-width">
+    </div>
+    <div>
+      <input type="radio" id="update-on-option" name="updatedPeriod" value="on" checked>
+      <label for="update-on-option">On</label>
+      <input type="radio" id="update-before-option" name="updatedPeriod" value="before">
+      <label for="update-before-option">Before</label>
+      <input type="radio" id="update-after-option" name="updatedPeriod" value="after">
+      <label for="update-after-option">After</label>
+    </div>
+  </div>`;
 }
 
 export default getProjectList;
