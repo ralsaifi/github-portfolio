@@ -1,5 +1,5 @@
 import { getConfig } from './assets/scripts/config.js'; 
-import settUserProfile from './assets/scripts/profile.js';
+import setUserProfile from './assets/scripts/profile.js';
 import setProjectList from './assets/scripts/projects.js';
 import { Message, Http } from './assets/scripts/utilities.js';
 
@@ -20,7 +20,7 @@ async function init() {
     return;
   }
 
-  settUserProfile(user, config);
+  setUserProfile(user, config);
   setProjectList(repoList, config);
 }
 
