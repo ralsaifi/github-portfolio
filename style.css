@@ -99,6 +99,7 @@
 @media (max-width: 799px) {
   .main-wrapper {
     padding: 10px;
+    padding-bottom: 0;
     grid-template-columns: 150px auto;
     gap: 0;
   }
@@ -127,6 +128,7 @@
   .main-content {
     grid-column: 1/-1;
     padding: 0;
+    border-radius: 16px 16px 0 0;
   }
 
   .filter-by-date-placeholder div {
@@ -136,5 +138,16 @@
   input[type="text"], 
   input[type="date"] {
     padding: 6px;
+  }
+
+  .project {
+    padding: 14px 20px;
+    box-shadow: none;
+    margin-bottom: 12px;
+  }
+
+  .project h2 {
+    font-size: 1.4em;
+    margin-bottom: 0;
   }
 }
